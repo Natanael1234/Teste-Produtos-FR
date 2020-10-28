@@ -1,0 +1,440 @@
+---
+openapi: 3.0.0
+info:
+  title: Loja
+  description: Servidor de loja.
+  contact:
+    name: Natanael
+    url: https://github.com/Natanael1234/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://petstore.swagger.io/v2
+tags:
+- name: produto
+  description: Produtos
+- name: pedido
+  description: Acesso aos pedidos
+- name: carrinho
+  description: Acesso carrinho
+paths:
+  /produto:
+    put:
+      tags:
+      - produto
+      summary: Atualiza um produto existente
+      operationId: updateProduto
+      requestBody:
+        $ref: '#/components/requestBodies/Produto'
+      responses:
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Produto não encontrado
+        "405":
+          description: Exceção de validação
+    post:
+      tags:
+      - produto
+      summary: Adiciona um novo produto
+      operationId: addProduto
+      requestBody:
+        $ref: '#/components/requestBodies/Produto'
+      responses:
+        "405":
+          description: Entrada inválida
+  /produtos:
+    get:
+      tags:
+      - produto
+      summary: Busca Produtos
+      description: Busca todos os produtos e todos os seus atributos
+      operationId: findProdutos
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+  /produtos/compra:
+    get:
+      tags:
+      - produto
+      summary: Busca produtos para compra
+      description: Busca produtos para compra (apenas produtos com status ativo) e todos os seus atributos
+      operationId: getProdutosCompra
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+  /produto/{produtoId}:
+    get:
+      tags:
+      - produto
+      summary: Busca produto por ID
+      description: Retorna um único produto
+      operationId: getProdutoById
+      parameters:
+      - name: produtoId
+        in: path
+        description: ID do produto a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Produto não encontrado
+    delete:
+      tags:
+      - produto
+      summary: Deleta um produto
+      operationId: deleteProduto
+      parameters:
+      - name: produtoId
+        in: path
+        description: Id do produto a ser deletado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Produto não encontrado
+  /carrinho:
+    get:
+      tags:
+      - produto
+      summary: Obtém o carrinho
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carrinho'
+    delete:
+      tags:
+      - produto
+      summary: Esvazia o carrinho
+      operationId: esvaziaCarrinho
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sucesso:
+                    type: boolean
+                    description: "true"
+                example: '{ sucesso:true }'
+  /carrinho/{produtoId}:
+    post:
+      tags:
+      - produto
+      summary: Adiciona um ou mais produtos ao carrinho.
+      operationId: addProdutoCarrinho
+      parameters:
+      - name: produtoId
+        in: path
+        description: ID do produto que precisa ser adicionado ao carrinho
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+        example: 5
+      - name: quantidade
+        in: query
+        description: Quantidade do produto que precisa ser adicionado ao carrinho. Padrão = 0
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+        example: 3
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carrinhoId:
+                    type: integer
+                    description: ID do carrinho
+                example: '{ carrinhoId:6 }'
+        "404":
+          description: Produto não encontrado
+  /pedidos:
+    get:
+      tags:
+      - pedidos
+      summary: Retorna os pedidos ordenados por data de criação ascendente
+      operationId: getPedidos
+      responses:
+        "200":
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
+    post:
+      tags:
+      - pedido
+      summary: Faz pedido do produto
+      operationId: placePedido
+      requestBody:
+        description: pedido de compra do produto efetuado
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pedido'
+        required: true
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        "400":
+          description: Invalid Pedido
+  /pedidos/finalizar:
+    get:
+      tags:
+      - pedido, carrinho
+      summary: Finaliza um pedido. Cria um pedido na base e limpa o carrinho
+      operationId: finalizaPedido
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
+        "400":
+          description: Valor em carrinho menor que dez reais
+        "404":
+          description: Carrinho vazio
+  /pedido/{pedidoId}:
+    post:
+      tags:
+      - pedido
+      summary: Atualiza o status de um pedido.
+      operationId: atualizarStatusPedido
+      parameters:
+      - name: pedidoId
+        in: path
+        description: ID do pedido a ter o status atualizado carrinho
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+        example: 7
+      - name: status
+        in: query
+        description: Novo status do pedido a ser atualizado. Padrão = novo
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: novo
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carrinhoId:
+                    type: boolean
+                    description: Se a operação foi bem sucedida
+                example: '{ sucesso: true }'
+        "404":
+          description: Pedido não encontrado
+components:
+  schemas:
+    Carrinho:
+      required:
+      - formaDePagamento
+      - itens
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemCarrinho'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ItemCarrinho:
+      required:
+      - produto
+      - quantidade
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        produto:
+          $ref: '#/components/schemas/Produto'
+        quantidade:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Pedido:
+      required:
+      - enderecoDeEntrega
+      - formaDePagamento
+      - itens
+      - status
+      - valorTotal
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 3
+        itens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Produto'
+        formaDePagamento:
+          type: string
+          enum:
+          - dinheiro
+          - cartao
+        enderecoDeEntrega:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        valorTotal:
+          type: integer
+          format: int32
+        status:
+          type: string
+          description: Pedido Status
+          enum:
+          - novo
+          - aceito
+          - saiu_pra_entrega
+          - entregue
+          - cancelado
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Produto:
+      required:
+      - nome
+      - preco
+      - status
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 4
+        nome:
+          type: string
+          example: pizza
+        descricao:
+          type: string
+          example: Pizza quentinha de calabresa
+        preco:
+          type: number
+          format: float
+        imagem:
+          type: string
+          format: url
+          example: https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: status do produto
+          enum:
+          - ativo
+          - inativo
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+  requestBodies:
+    Produto:
+      description: Objeto do produto que precisa ser adicionado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Produto'
+      required: true
