@@ -1,4 +1,7 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
+
+import { produtoRouter } from './routes/produtos';
+
 var cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -7,10 +10,10 @@ app.use(cors());
 app.use(bodyParser.json());
 const port: number = 3000;
 
-app.post('/produto', (req: Request, res: Response)=>{
-    res.send(req.body);
-});
+app.use(produtoRouter);
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
     console.log(`Servidor - ouvindo na porta: ${port}`);
 });
+
+export { app, server };
