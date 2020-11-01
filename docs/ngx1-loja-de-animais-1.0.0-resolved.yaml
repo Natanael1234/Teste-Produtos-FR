@@ -35,6 +35,8 @@ paths:
           description: Produto não encontrado
         "405":
           description: Exceção de validação
+        "500":
+          description: Falha ao salvar produto
     post:
       tags:
       - produto
@@ -44,7 +46,9 @@ paths:
         $ref: '#/components/requestBodies/Produto'
       responses:
         "405":
-          description: Entrada inválida
+          description: Exceção de validação
+        "500":
+          description: Falha ao salvar produto
   /produtos:
     get:
       tags:
@@ -160,33 +164,27 @@ paths:
                     type: boolean
                     description: "true"
                 example: '{ sucesso:true }'
-  /carrinho/{produtoId}:
+  /carrinho/add/produto:
     post:
       tags:
       - produto
       summary: Adiciona um ou mais produtos ao carrinho.
       operationId: addProdutoCarrinho
-      parameters:
-      - name: produtoId
-        in: path
-        description: ID do produto que precisa ser adicionado ao carrinho
+      requestBody:
+        description: pedido de compra do produto efetuado
+        content:
+          application/json:
+              schema:
+                type: object
+                properties:
+                  produtoId:
+                    type: number
+                    description: ID do produto
+                  quantidade:
+                    type: number
+                    description: Quantidade do produto
+                example: '{ produtoId:2, quantidade:3 }'
         required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
-        example: 5
-      - name: quantidade
-        in: query
-        description: Quantidade do produto que precisa ser adicionado ao carrinho. Padrão = 0
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-          format: int32
-        example: 3
       responses:
         "200":
           description: Operação bem sucedida
@@ -199,8 +197,10 @@ paths:
                     type: integer
                     description: ID do carrinho
                 example: '{ carrinhoId:6 }'
+        "400":
+          description: Parâmetros inválidos
         "404":
-          description: Produto não encontrado
+          description: Produto não encontrado          
   /pedidos:
     get:
       tags:
@@ -236,7 +236,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Pedido'
         "400":
-          description: Invalid Pedido
+          description: Pedido inválido.
   /pedidos/finalizar:
     get:
       tags:
