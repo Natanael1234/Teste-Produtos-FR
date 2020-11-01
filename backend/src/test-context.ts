@@ -107,8 +107,8 @@ class TestContext {
     }
 
     /** Insere um produto no carrinho via API e efetua os testes básicos. */
-    async inserirProdutoCarrinho(produtoId: number, quantidade: number) {
-        let response = await this.get(`/carrinho/${produtoId}&quantidade=${quantidade}`);  // efetua a requisição
+    async adicionarProdutoNoCarrinho(produtoId: number, quantidade: number) {
+        let response = await this.post('/carrinho/add/produto', {produtoId, quantidade});  // efetua a requisição
         // efetua testes básicos
         expect(response.status).toBe(200); // se status 200
         expect(response.type).toBe('application/json'); // se application/json
@@ -132,10 +132,9 @@ class TestContext {
     async esvaziarCarrinho () {  
         let response = await this.delete('/carrinho');
         expect(response.status).toBe(200); // se status 200
-        expect(response.type).toBe('application/json'); // se application/json
-        let carrinho = response.body;
-        validaEstruturaCarrinho(carrinho);
-        return {response, carrinho};
+        expect(response.type).toBe('application/json'); // se application/json        
+        expect(response.body.sucesso).toBe(true);
+        return {response};
     }
 
 

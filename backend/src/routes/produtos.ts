@@ -11,8 +11,13 @@ produtoRouter.post('/produto', async (req: Request, res: Response, next:NextFunc
     if (status != 'ativo' && status != 'inativo')  return res.status(405).send('Exceção de validação');
     let preco = parseFloat(req.body.preco);
     if(preco < 0) return res.status(405).send('Exceção de validação');
-    let produtoSalvo = await db.salvarProduto(req.body);   
-    return res.status(200).send(produtoSalvo); 
+    try {
+        let produtoSalvo = await db.salvarProduto(req.body);          
+        return res.status(200).send(produtoSalvo); 
+    } catch (error) {
+        if (error.status) return res.status(error.status).send(error.message);
+        return res.status(500).send('Falha ao salvar produto');
+    }    
 });
 
 produtoRouter.put('/produto', async (req: Request, res: Response, next:NextFunction)=> {      
@@ -28,8 +33,13 @@ produtoRouter.put('/produto', async (req: Request, res: Response, next:NextFunct
         preco = parseFloat(req.body.preco);
         if(preco && preco < 0) return res.status(405).send('Exceção de validação');
     } 
-    let produtoSalvo = await db.salvarProduto(req.body);
-    return res.status(200).send(produtoSalvo); 
+    try {
+        let produtoSalvo = await db.salvarProduto(req.body);        
+        return res.status(200).send(produtoSalvo); 
+    } catch (error) {
+        if (error.status) return res.status(error.status).send(error.message);
+        return res.status(500).send('Falha ao salvar produto');
+    }
 });
 
 produtoRouter.get('/produtos', async (req: Request, res: Response, next:NextFunction)=> {            
@@ -43,14 +53,10 @@ produtoRouter.get('/produtos/compra', async (req: Request, res: Response, next:N
 
 produtoRouter.get('/produto/:produtoId', async (req: Request, res: Response, next:NextFunction)=> {
     let produtoId = parseInt(req.params.produtoId);
-    if(isNaN(produtoId)) return res.status(400).send('ID inválido fornecido');
-    if (produtoId > 10)  {
-        return res.status(404).send({message:'Produto não encontrado'});
-    } else {
-        let produto = await db.getProduto(produtoId);  
-        if (!produto) return res.status(404).send({message:'Produto não encontrado'});
-        return res.status(200).send(produto);
-    }
+    if(isNaN(produtoId)) return res.status(400).send('ID inválido fornecido');        
+    let produto = await db.getProduto(produtoId);  
+    if (!produto) return res.status(404).send({message:'Produto não encontrado'});
+    return res.status(200).send(produto);    
 });
 produtoRouter.delete('/produto/:produtoId', async (req: Request, res: Response, next:NextFunction)=> {
     let produtoId = parseInt(req.params.produtoId);

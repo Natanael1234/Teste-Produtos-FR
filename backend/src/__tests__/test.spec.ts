@@ -90,17 +90,17 @@ describe("Teste da API", () => {
 
     // cria produtos para inserir no carrinho
     let create1 = await ctx.criarProdutoSimplificado('teste_01_carrinho');
-    let insert1 = await ctx.inserirProdutoCarrinho(create1.produto.id, 3);
+    let insert1 = await ctx.adicionarProdutoNoCarrinho(create1.produto.id, 3);
     // verifica se a inserção do produto no carrinho retornou o carrinhoId correto
     expect(insert1.carrinhoId).toBe(antes.carrinho.id);
 
     let create2 = await ctx.criarProdutoSimplificado('test_02_carrinho');    
-    let insert2 = await ctx.inserirProdutoCarrinho(create2.produto.id, 2); 
+    let insert2 = await ctx.adicionarProdutoNoCarrinho(create2.produto.id, 2); 
     // verifica se a inserção do produto no carrinho retornou o carrinhoId correto
     expect(insert2.carrinhoId).toBe(antes.carrinho.id);          
         
     // busca o carrinho novamente
-    let depois = await ctx.buscarCarrinho();    
+    let depois = await ctx.buscarCarrinho();
 
     // verifica se a segunda consulta possui dois itens a mais que a primeira
     expect(antes.carrinho.itens.length).toBe(depois.carrinho.itens.length - 2);
@@ -127,12 +127,12 @@ describe("Teste da API", () => {
     // cria produtos para inserir no carrinho
     let create1 = await ctx.criarProdutoSimplificado('teste_01_limpa_carrinho');
     let create2 = await ctx.criarProdutoSimplificado('teste_02_limpa_carrinho');
-    let insert1 = await ctx.inserirProdutoCarrinho(create1.produto.id, 3);
-    let insert2 = await ctx.inserirProdutoCarrinho(create1.produto.id, 1);
+    let insert1 = await ctx.adicionarProdutoNoCarrinho(create1.produto.id, 3);
+    let insert2 = await ctx.adicionarProdutoNoCarrinho(create1.produto.id, 1);
     // busca o carrinho e verifica se está vazio    
-    let resEsvaziar = await ctx.esvaziarCarrinho();
+    let resEsvaziar = await ctx.esvaziarCarrinho();    
     let depois = await ctx.buscarCarrinho();
-    expect(depois.carrinho.length).toBe(0);
+    expect(depois.carrinho.itens.length).toBe(0);
   }); 
 
   afterAll(done => {

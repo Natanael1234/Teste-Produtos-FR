@@ -74,8 +74,8 @@ export function validaEstruturaCarrinho (carrinho:any) {
     expect(Number.isInteger(carrinho.id)).toBe(true); // se recebeu id do carrinho
     expect(carrinho.id).toBeGreaterThan(0); // se o id do carrinho é maior que 0
     expect(Array.isArray(carrinho.itens)); // verifica se o carrinho possui um array de itens    
-    expect(carrinho.createdAt).toMatch(/^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}$/); // data de criação
-    expect(carrinho.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}$/); // data de atualização    
+    expect(carrinho.createdAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de criação
+    expect(carrinho.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de atualização        
     for(let item of carrinho.itens) { // para cada item do carrinho verifica se
         expect(item).toBeTruthy(); // item existe;
         expect(Number.isInteger(item.id)).toBe(true); // item possui id inteiro
