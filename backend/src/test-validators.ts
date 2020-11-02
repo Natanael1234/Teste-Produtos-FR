@@ -68,14 +68,14 @@ export function validaComparacaoProdutos (produtoNaoSalvo:any, produtoSalvo:any)
 
 /**
  * Verifica se os dados de um carrinho estão estruturalmente corretos.
- * @param carrinho dados do carrinho a sererm validados.
+ * @param carrinho dados do carrinho a serer validados.
  */
 export function validaEstruturaCarrinho (carrinho:any) {
     expect(Number.isInteger(carrinho.id)).toBe(true); // se recebeu id do carrinho
     expect(carrinho.id).toBeGreaterThan(0); // se o id do carrinho é maior que 0
-    expect(Array.isArray(carrinho.itens)); // verifica se o carrinho possui um array de itens    
     expect(carrinho.createdAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de criação
-    expect(carrinho.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de atualização        
+    expect(carrinho.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de atualização  
+    expect(Array.isArray(carrinho.itens)); // verifica se o carrinho possui um array de itens    
     for(let item of carrinho.itens) { // para cada item do carrinho verifica se
         expect(item).toBeTruthy(); // item existe;
         expect(Number.isInteger(item.id)).toBe(true); // item possui id inteiro
@@ -86,4 +86,48 @@ export function validaEstruturaCarrinho (carrinho:any) {
         expect(Number.isInteger(item.quantidade)).toBe(true); // item possui quantidade
         expect(item.quantidade).toBeGreaterThanOrEqual(0); // quantidade do item maior ou igual a 0    
     }
+}
+
+/**
+ * Verifica se os dados de um pedido estão estruturalmente corretos.
+ * @param pedido dados do pedido a ser validado.
+ */
+export function validaEstruturaPedido (pedido:any) {
+    // id
+    expect(Number.isInteger(pedido.id)).toBe(true); 
+    expect(pedido.id).toBeGreaterThan(0); /
+    // data de criação
+    expect(pedido.createdAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de criação
+    // data de atualização
+    expect(pedido.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de atualização
+    // itens
+    expect(Array.isArray(pedido.itens)); // verifica se o carrinho possui um array de itens    
+    for(let item of pedido.itens) { // para cada item do carrinho verifica se
+        expect(item).toBeTruthy(); // item existe;
+        // nome
+        expect(item.nome).toBeTruthy();    
+        expect(typeof item.nome).toBe('string');
+        // descrição 
+        expect(item.descricao).toBeTruthy();
+        expect(typeof item.descricao).toBe('string');
+        // preço
+        expect(typeof item.preco == 'number').toBe(true); 
+        expect(item.preco).toBeGreaterThanOrEqual(0); 
+        // quantidade
+        expect(Number.isInteger(item.quantidade)).toBe(true);
+        expect(item.quantidade).toBeGreaterThan(0);
+        // id do produto
+        expect(Number.isInteger(item.produtoId)).toBe(true);
+        expect(item.produtoId).toBeGreaterThan(0); 
+    }
+    // forma de pagamento
+    expect(['dinheiro', 'cartao']).toContain(pedido.formaDePagamento);
+    // endereço de emtrega
+    expect(pedido.enderecoDeEntrega).toBeTruthy();
+    expect(typeof pedido.enderecoDeEntrega).toBe('string');
+    // valor total
+    expect(typeof pedido.valorTotal).toBe('number');
+    expect(Number.isInteger(pedido.valorTotal)).toBeGreaterThanOrEqual(0);
+    // status
+    expect([ 'novo', 'aceito', 'saiu_pra_entrega', 'entregue', 'cancelado' ]).toContain(pedido.status);    
 }

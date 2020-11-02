@@ -196,7 +196,7 @@ class MockDB {
                 itemCarrinho = this.copyItemCarrinho(itemCarrinho);                
             }
             return itemCarrinho;
-        });        
+        });
         for(let item of itens) {
             item.produto = await this.getProduto(item.produtoId);                    
         }
