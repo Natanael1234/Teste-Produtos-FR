@@ -95,7 +95,7 @@ export function validaEstruturaCarrinho (carrinho:any) {
 export function validaEstruturaPedido (pedido:any) {
     // id
     expect(Number.isInteger(pedido.id)).toBe(true); 
-    expect(pedido.id).toBeGreaterThan(0); /
+    expect(pedido.id).toBeGreaterThan(0); 
     // data de criação
     expect(pedido.createdAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/); // data de criação
     // data de atualização
