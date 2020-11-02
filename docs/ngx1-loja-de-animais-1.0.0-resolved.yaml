@@ -256,11 +256,11 @@ paths:
                     description: ID do pedido
                 example: { pedidoId: 5 }
         "400":
-          description: Valor em carrinho menor que dez reais
+          description: Parâmetros inválidos
         "404":
           description: Carrinho vazio
   /pedido/status:
-    post:
+    put:
       tags:
       - pedido
       summary: Atualiza o status de um pedido.
