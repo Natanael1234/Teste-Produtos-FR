@@ -184,12 +184,12 @@ describe("Teste da API", () => {
 
     // testa mudança de status
     let testaStatus = async (
-      pedidoId:number,
+      pedidoId: number,
       statusEnvio: 'novo' | 'aceito' | 'saiu_pra_entrega' | 'entregue' | 'cancelado',
       statusEsperado: 'novo' | 'aceito' | 'saiu_pra_entrega' | 'entregue' | 'cancelado',
       statusCodeEsperado: number) => {
-      // busca o status
-      let resStatus = await ctx.post('/pedido/status', { pedidoId, status: statusEnvio });
+      // busca o status      
+      let resStatus = await ctx.put('/pedido/status', { pedidoId, status: statusEnvio });
       // verifica se recebeu o código esperado
       expect(resStatus.status).toBe(statusCodeEsperado);
       // busca o pedido
@@ -200,13 +200,15 @@ describe("Teste da API", () => {
 
     // partindo do princípio de que o pedido fechado como 'novo' 
     // testa primeiro as transições de status que devem retornar erro e as permitidas
-    
-    await testaStatus(resFinaliza.pedidoId, 'novo', 'novo', 200);
+
+
     await testaStatus(resFinaliza.pedidoId, 'aceito', 'aceito', 200);
     await testaStatus(resFinaliza.pedidoId, 'saiu_pra_entrega', 'saiu_pra_entrega', 200);
     await testaStatus(resFinaliza.pedidoId, 'entregue', 'entregue', 200);
-    await testaStatus(resFinaliza.pedidoId, 'cancelado', 'novo', 400);
-    
+    await testaStatus(resFinaliza.pedidoId, 'cancelado', 'cancelado', 200);
+    await testaStatus(resFinaliza.pedidoId, 'novo', 'cancelado', 400);
+
+
     // TODO: testar outros cenários
 
   });

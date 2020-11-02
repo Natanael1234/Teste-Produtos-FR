@@ -107,9 +107,6 @@ export function validaEstruturaPedido (pedido:any) {
         // nome
         expect(item.nome).toBeTruthy();    
         expect(typeof item.nome).toBe('string');
-        // descrição 
-        expect(item.descricao).toBeTruthy();
-        expect(typeof item.descricao).toBe('string');
         // preço
         expect(typeof item.preco == 'number').toBe(true); 
         expect(item.preco).toBeGreaterThanOrEqual(0); 
@@ -122,12 +119,12 @@ export function validaEstruturaPedido (pedido:any) {
     }
     // forma de pagamento
     expect(['dinheiro', 'cartao']).toContain(pedido.formaDePagamento);
-    // endereço de emtrega
+    // endereço de entrega
     expect(pedido.enderecoDeEntrega).toBeTruthy();
     expect(typeof pedido.enderecoDeEntrega).toBe('string');
     // valor total
     expect(typeof pedido.valorTotal).toBe('number');
-    expect(Number.isInteger(pedido.valorTotal)).toBeGreaterThanOrEqual(0);
+    expect(pedido.valorTotal).toBeGreaterThanOrEqual(0);
     // status
     expect([ 'novo', 'aceito', 'saiu_pra_entrega', 'entregue', 'cancelado' ]).toContain(pedido.status);    
 }
