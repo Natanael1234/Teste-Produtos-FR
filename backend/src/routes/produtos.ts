@@ -47,7 +47,6 @@ produtoRouter.get('/produtos', async (req: Request, res: Response, next:NextFunc
 });
 
 produtoRouter.get('/produtos/compra', async (req: Request, res: Response, next:NextFunction)=> {
-    console.log('db.produtos.length', db.produtos.length)
     return res.send(await db.getProdutos(true));
 });
 
