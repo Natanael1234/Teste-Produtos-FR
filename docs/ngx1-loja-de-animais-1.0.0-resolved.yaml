@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
+                type: object
                 items:
                   $ref: '#/components/schemas/Produto'
   /produto/{produtoId}:
@@ -171,7 +171,6 @@ paths:
       summary: Adiciona um ou mais produtos ao carrinho.
       operationId: addProdutoCarrinho
       requestBody:
-        description: pedido de compra do produto efetuado
         content:
           application/json:
               schema:
@@ -216,72 +215,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Pedido'
+  /pedido/finalizar:
     post:
-      tags:
-      - pedido
-      summary: Faz pedido do produto
-      operationId: placePedido
-      requestBody:
-        description: pedido de compra do produto efetuado
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pedido'
-        required: true
-      responses:
-        "200":
-          description: Operação bem sucedida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pedido'
-        "400":
-          description: Pedido inválido.
-  /pedidos/finalizar:
-    get:
       tags:
       - pedido, carrinho
-      summary: Finaliza um pedido. Cria um pedido na base e limpa o carrinho
+      description: Finaliza um pedido. Cria um pedido na base e limpa o carrinho
       operationId: finalizaPedido
-      responses:
-        "200":
-          description: Operação bem sucedida
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pedido'
-        "400":
-          description: Valor em carrinho menor que dez reais
-        "404":
-          description: Carrinho vazio
-  /pedido/{pedidoId}:
-    post:
-      tags:
-      - pedido
-      summary: Atualiza o status de um pedido.
-      operationId: atualizarStatusPedido
-      parameters:
-      - name: pedidoId
-        in: path
-        description: ID do pedido a ter o status atualizado carrinho
+      requestBody:
         required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
-        example: 7
-      - name: status
-        in: query
-        description: Novo status do pedido a ser atualizado. Padrão = novo
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-        example: novo
+        content:
+          application/json:
+              schema:
+                type: object
+                properties:
+                  carrinhoId:
+                    type: integer
+                    format: int64
+                    description: ID do carrinho
+                  formaDePagamento:
+                    description: Forma de pagamento
+                    type: string
+                    enum:
+                    - dinheiro
+                    - cartao
+                  enderecoDeEntrega:
+                    description: Endereço de entrega
+                    type: string
+                example: {carrinhoId: 4, formaDePagamento: 'cartao', enderecoDeEntrega: 'Rua das Camélias, 4, Cidade das Flores'}
       responses:
         "200":
           description: Operação bem sucedida
@@ -290,10 +250,55 @@ paths:
               schema:
                 type: object
                 properties:
-                  carrinhoId:
+                  sucesso:
+                    type: integer
+                    format: int64
+                    description: ID do pedido
+                example: { pedidoId: 5 }
+        "400":
+          description: Valor em carrinho menor que dez reais
+        "404":
+          description: Carrinho vazio
+  /pedido/status:
+    post:
+      tags:
+      - pedido
+      summary: Atualiza o status de um pedido.
+      operationId: atualizarStatusPedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                type: object
+                properties:
+                  pedidoId:
+                    type: number
+                    description: ID do pedido a ter o status atualizado carrinho
+                  status:
+                    type: string
+                    enum:
+                    - novo
+                    - aceito
+                    - saiu_pra_entrega
+                    - entregue
+                    - cancelado                    
+                    description: Novo status do pedido a ser atualizado. Padrão = novo
+                example: { pedidoId: 2, status: novo }
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sucesso:
                     type: boolean
                     description: Se a operação foi bem sucedida
-                example: '{ sucesso: true }'
+                example: { sucesso: true }
+        "400":
+          description: Mudança de status inválida.
         "404":
           description: Pedido não encontrado
 components:
@@ -352,7 +357,7 @@ components:
         itens:
           type: array
           items:
-            $ref: '#/components/schemas/Produto'
+            $ref: '#/components/schemas/ItemPedido'
         formaDePagamento:
           type: string
           enum:
@@ -378,6 +383,27 @@ components:
           - saiu_pra_entrega
           - entregue
           - cancelado
+    ItemPedido:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: 'Pizza de Calabresa'
+          description: 'Nome do produto'
+        preco: 
+          type: number
+          format: float
+          example: 35.05
+          description: preço unitário do produto
+        quantidade:
+          type: integer
+          format: int32
+          description: Quantidade do item
+        produtoId:
+          type: integer
+          format: int64
+          description: ID do produto
+          example: 4
     Tag:
       type: object
       properties:
