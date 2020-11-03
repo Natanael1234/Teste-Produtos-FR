@@ -1,7 +1,10 @@
+  
 import express, { NextFunction, Request, Response } from 'express';
-import { carrinhoRouter } from './routes/carrinho';
-import { produtoRouter } from './routes/produtos';
-import { pedidoRouter } from './routes/pedido';
+import { carrinhoRouter } from './routes/carrinho.route';
+import { produtoRouter } from './routes/produtos.route';
+import { pedidoRouter } from './routes/pedido.route';
+import sequelize from './sequelize';
+
 
 var cors = require('cors');
 const bodyParser = require('body-parser');
