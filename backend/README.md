@@ -1,7 +1,29 @@
-# Depurando
+# Leia Me
 
-Instale o Nodemon:
+## Instalando dependências globais
+
+Abra um terminal e execute os seguintes comandos:
 
 'npm i -g nodemon'
 
-No Visual Studio Code vá até a aba Run, selecion 'Node: Nodemon' e e clique no botão 'Start Debugging'.
+'npm i -g jest'
+
+## Instalando as dependências locais do backend
+
+Abra a pasta backend e execute:
+
+'npm i'
+
+## Depurar 
+
+Para depurar o backend primeiro abra um terminal, na pasta backend, e execute o comando:
+
+'npm start'
+
+Em seguida abra o Visual Studio Code executar a confirguração de depuração 'Express Debug'.
+
+## Executar Testes Automatizados
+
+Para executar os testes automatizados abra um terminal, na pasta backend e execute o comando:
+
+ 'npm run test'
