@@ -13,7 +13,7 @@ produtoRouter.post('/produto', async (req: Request, res: Response, next: NextFun
     if (status != 'ativo' && status != 'inativo') return res.status(405).send('Exceção de validação');
     if (preco < 0) return res.status(405).send('Preço inválido');
     try {
-        await sequelize.databaseVersion();
+        // await sequelize.databaseVersion();
         let regProduto = new Produto({
             nome,
             descricao,
