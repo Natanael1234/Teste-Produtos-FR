@@ -61,7 +61,8 @@ carrinhoRouter.post('/carrinho/add/produto', async (req: Request, res: Response,
         // se encontrou o item no carrinho
         if (itemCarrinho) {
             // adiciona a quantidade ao item tomando cuidado de evitar quantidade negativa.
-            quantidade = Math.max(0, itemCarrinho.quantidade + quantidade);
+            itemCarrinho.quantidade = Math.max(0, itemCarrinho.quantidade + quantidade);
+            await itemCarrinho.save();
         }
     }
     // se o item ainda não existe no carrinho
