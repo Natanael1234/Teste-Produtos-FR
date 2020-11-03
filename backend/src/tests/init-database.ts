@@ -1,4 +1,4 @@
-import { sequelize } from "../sequelize";
+import sequelize from "../sequelize";
 
 /** Gera as tabelas do banco de dados. ATENÇÃO: Apaga as tabelas já existentes. */
 let initDB = () => {  
