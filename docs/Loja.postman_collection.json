@@ -1,0 +1,1124 @@
+{
+	"info": {
+		"_postman_id": "cc355b9b-5fdb-4263-b54a-ed262c648ea2",
+		"name": "Loja",
+		"description": "Servidor de loja.\n\nContact Support:\n Name: Natanael",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "produto",
+			"item": [
+				{
+					"name": "{produto Id}",
+					"item": [
+						{
+							"name": "Busca produto por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto/17",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto",
+										"17"
+									]
+								},
+								"description": "Retorna um único produto"
+							},
+							"response": [
+								{
+									"name": "Operação bem sucedida",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:produtoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":produtoId"
+											],
+											"variable": [
+												{
+													"key": "produtoId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"nome\": \"pizza\",\n \"preco\": \"<float>\",\n \"status\": \"<string>\",\n \"id\": 4,\n \"descricao\": \"Pizza quentinha de calabresa\",\n \"imagem\": \"https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg\",\n \"tags\": [\n  {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\"\n  },\n  {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Produto não encontrado",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:produtoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":produtoId"
+											],
+											"variable": [
+												{
+													"key": "produtoId"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "ID inválido fornecido",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:produtoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":produtoId"
+											],
+											"variable": [
+												{
+													"key": "produtoId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Deleta um produto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto/17",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto",
+										"17"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ID inválido fornecido",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:produtoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":produtoId"
+											],
+											"variable": [
+												{
+													"key": "produtoId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Produto não encontrado",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:produtoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":produtoId"
+											],
+											"variable": [
+												{
+													"key": "produtoId"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Operação bem sucedida",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:produtoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":produtoId"
+											],
+											"variable": [
+												{
+													"key": "produtoId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"nome\": \"pizza\",\n \"preco\": \"<float>\",\n \"status\": \"<string>\",\n \"id\": 4,\n \"descricao\": \"Pizza quentinha de calabresa\",\n \"imagem\": \"https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg\",\n \"tags\": [\n  {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\"\n  },\n  {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\"\n  }\n ]\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Atualiza um produto existente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Bola\",\n    \"preco\": 33.02,\n    \"status\": \"inativo\",\n    \"id\": 17,\n    \"descricao\": \"Bola de futebol\",\n    \"imagem\": \"www.imagem.com/bola.jpg\",\n    \"tags\": [\n        {\n            \"id\": 1,\n            \"name\": \"tag1\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"tag2\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Falha ao salvar produto",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Produto não encontrado",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Exceção de validação",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "ID inválido fornecido",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Adiciona um novo produto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Prouduto TESTE\",\n    \"preco\": 53.6,\n    \"status\": \"ativo\",    \n    \"descricao\": \"Descrição do produto\",\n    \"imagem\": \"www.imagem.com/imagem.jpg\",\n    \"tags\": [\n        {\n            \"id\": 1,\n            \"name\": \"tag1\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"tag5\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Exceção de validação",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Falha ao salvar produto",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "produtos",
+			"item": [
+				{
+					"name": "Busca Produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/produtos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos"
+							]
+						},
+						"description": "Busca todos os produtos e todos os seus atributos"
+					},
+					"response": [
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produtos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"nome\": \"pizza\",\n  \"preco\": \"<float>\",\n  \"status\": \"<string>\",\n  \"id\": 4,\n  \"descricao\": \"Pizza quentinha de calabresa\",\n  \"imagem\": \"https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg\",\n  \"tags\": [\n   {\n    \"id\": \"<long>\",\n    \"name\": \"<string>\"\n   },\n   {\n    \"id\": \"<long>\",\n    \"name\": \"<string>\"\n   }\n  ]\n },\n {\n  \"nome\": \"pizza\",\n  \"preco\": \"<float>\",\n  \"status\": \"<string>\",\n  \"id\": 4,\n  \"descricao\": \"Pizza quentinha de calabresa\",\n  \"imagem\": \"https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg\",\n  \"tags\": [\n   {\n    \"id\": \"<long>\",\n    \"name\": \"<string>\"\n   },\n   {\n    \"id\": \"<long>\",\n    \"name\": \"<string>\"\n   }\n  ]\n }\n]"
+						}
+					]
+				},
+				{
+					"name": "Busca produtos para compra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/produtos/compra",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos",
+								"compra"
+							]
+						},
+						"description": "Busca produtos para compra (apenas produtos com status ativo) e todos os seus atributos"
+					},
+					"response": [
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produtos/compra",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										"compra"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "carrinho",
+			"item": [
+				{
+					"name": "Obtém o carrinho",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carrinho",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinho"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/carrinho",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carrinho"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 13041170,\n \"items\": [\n  {\n   \"produto\": {\n    \"nome\": \"pizza\",\n    \"preco\": \"<float>\",\n    \"status\": \"<string>\",\n    \"id\": 4,\n    \"descricao\": \"Pizza quentinha de calabresa\",\n    \"imagem\": \"https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg\",\n    \"tags\": [\n     {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\"\n     },\n     {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\"\n     }\n    ]\n   },\n   \"quantidade\": -28956973,\n   \"id\": 14565691,\n   \"createdAt\": \"1987-02-19T05:19:44.056Z\",\n   \"updatedAt\": \"2016-03-20T02:41:11.892Z\"\n  },\n  {\n   \"produto\": {\n    \"nome\": \"pizza\",\n    \"preco\": \"<float>\",\n    \"status\": \"<string>\",\n    \"id\": 4,\n    \"descricao\": \"Pizza quentinha de calabresa\",\n    \"imagem\": \"https://cdn.panelinha.com.br/receita/1443495600000-Pizza-de-mucarela-caseira.jpg\",\n    \"tags\": [\n     {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\"\n     },\n     {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\"\n     }\n    ]\n   },\n   \"quantidade\": 34761604,\n   \"id\": 52727404,\n   \"createdAt\": \"1983-07-07T15:24:55.209Z\",\n   \"updatedAt\": \"1980-04-23T06:26:17.324Z\"\n  }\n ],\n \"createdAt\": \"1971-06-24T09:31:36.550Z\",\n \"updatedAt\": \"1945-06-13T09:01:01.383Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Esvazia o carrinho",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carrinho",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinho"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/carrinho",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carrinho"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"sucesso\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Adiciona um ou mais produtos ao carrinho.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"produtoId\": 1,\n    \"quantidade\": 1\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carrinho/add/produto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinho",
+								"add",
+								"produto"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"produtoId\": \"<number>\",\n    \"quantidade\": \"<number>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/carrinho/add/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carrinho",
+										"add",
+										"produto"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"carrinhoId\": -22810643\n}"
+						},
+						{
+							"name": "Parâmetros inválidos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"produtoId\": \"<number>\",\n    \"quantidade\": \"<number>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/carrinho/add/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carrinho",
+										"add",
+										"produto"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Produto não encontrado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"produtoId\": \"<number>\",\n    \"quantidade\": \"<number>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/carrinho/add/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carrinho",
+										"add",
+										"produto"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "pedido",
+			"item": [
+				{
+					"name": "finaliza Pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"carrinhoId\": 1,\n    \"formaDePagamento\": \"dinheiro\",\n    \"enderecoDeEntrega\": \"Rua 3\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedido/finalizar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido",
+								"finalizar"
+							]
+						},
+						"description": "Finaliza um pedido. Cria um pedido na base e limpa o carrinho"
+					},
+					"response": [
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"carrinhoId\": 4,\n    \"formaDePagamento\": \"cartao\",\n    \"enderecoDeEntrega\": \"Rua das Camélias, 4, Cidade das Flores\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido/finalizar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido",
+										"finalizar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"pedidoId\": 5\n}"
+						},
+						{
+							"name": "Parâmetros inválidos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"carrinhoId\": 4,\n    \"formaDePagamento\": \"cartao\",\n    \"enderecoDeEntrega\": \"Rua das Camélias, 4, Cidade das Flores\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido/finalizar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido",
+										"finalizar"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Carrinho vazio",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"carrinhoId\": 4,\n    \"formaDePagamento\": \"cartao\",\n    \"enderecoDeEntrega\": \"Rua das Camélias, 4, Cidade das Flores\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido/finalizar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido",
+										"finalizar"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Atualiza o status de um pedido.",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pedidoId\": \"<number>\",\n    \"status\": \"<string>\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedido/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido",
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Mudança de status inválida.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"pedidoId\": 2,\n    \"status\": \"novo\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido",
+										"status"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Pedido não encontrado",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"pedidoId\": 2,\n    \"status\": \"novo\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido",
+										"status"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Operação bem sucedida",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"pedidoId\": 2,\n    \"status\": \"novo\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"sucesso\": true\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Retorna os pedidos ordenados por data de criação ascendente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/pedidos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Operação bem sucedida.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pedidos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"enderecoDeEntrega\": \"in nisi\",\n  \"formaDePagamento\": \"dinheiro\",\n  \"itens\": [\n   {\n    \"nome\": \"Pizza de Calabresa\",\n    \"preco\": 35.05,\n    \"quantidade\": -94811438,\n    \"produtoId\": 4\n   },\n   {\n    \"nome\": \"Pizza de Calabresa\",\n    \"preco\": 35.05,\n    \"quantidade\": 83382284,\n    \"produtoId\": 4\n   }\n  ],\n  \"status\": \"novo\",\n  \"valorTotal\": 56401754,\n  \"id\": 3,\n  \"createdAt\": \"1946-04-30T17:21:30.231Z\",\n  \"updatedAt\": \"1967-04-29T20:37:31.909Z\"\n },\n {\n  \"enderecoDeEntrega\": \"nulla\",\n  \"formaDePagamento\": \"dinheiro\",\n  \"itens\": [\n   {\n    \"nome\": \"Pizza de Calabresa\",\n    \"preco\": 35.05,\n    \"quantidade\": 17035914,\n    \"produtoId\": 4\n   },\n   {\n    \"nome\": \"Pizza de Calabresa\",\n    \"preco\": 35.05,\n    \"quantidade\": 50304463,\n    \"produtoId\": 4\n   }\n  ],\n  \"status\": \"entregue\",\n  \"valorTotal\": 20403197,\n  \"id\": 3,\n  \"createdAt\": \"2020-07-22T02:17:21.950Z\",\n  \"updatedAt\": \"1990-02-14T18:48:14.656Z\"\n }\n]"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://petstore.swagger.io/v2",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
