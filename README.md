@@ -1,5 +1,7 @@
 # Leia Me
 
+Este projeto de API foi criado com NodeJS, TypeScript, Sequelize e MySQL.
+
 ## Instalando dependências globais
 
 É necessário ter o NodeJS instalado. Esse projeto foi testado com Node v12.18.3 instalado.
