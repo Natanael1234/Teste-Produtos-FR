@@ -1,12 +1,17 @@
-import { app, server } from "./app";
+import { app, server } from "../app";
 import request from "supertest";
 import { validaComparacaoProdutos, validaEstruturaCarrinho, validaEstruturaPedido } from "./test-validators";
 
-class TestContext {
 
+class TestContext {
+    _numTeste = 1;
     app = app;
     server = server;
     request = request;
+
+    get numTeste () {
+        return this._numTeste++;
+    }  
 
     async get(url: string) {
         return await request(app).get(url);
@@ -58,7 +63,7 @@ class TestContext {
         tags?: { id: number, name: string }[]
     }) {
         // cria produtos para inserir no carrinho
-        let response = await this.post("/produto", dados);
+        let response = await this.post("/produto", dados);        
         // efetua testes básicos
         expect(response.status).toBe(200); // se status 200
         expect(response.type).toBe('application/json'); // se application/json
@@ -75,7 +80,7 @@ class TestContext {
     async criarProduto(slug: string, options?: {
         status?: 'ativo' | 'inativo',
         preco?: number,
-        tags: { id: number, name: string }[]
+        tags?: { id: number, name: string }[]
     }) {
         return await this.criarProdutoCompleto({
             imagem: `http://www.imagens.com./produtos/produto_${slug}.jpg`,
@@ -88,11 +93,11 @@ class TestContext {
     }
 
     /** Busca os produtos */
-    async buscarProdutos() {
-        let response = await this.get('/produtos');
+    async buscarProdutos(ativos?:boolean) {
+        let response = await this.get(ativos == true ? '/produtos/compra' : '/produtos');
         expect(response.status).toBe(200);
         expect(response.type).toBe('application/json');
-        let produtos: any[] = response.body;
+        let produtos: any[] = response.body;        
         expect(Array.isArray(produtos)).toBe(true);
         return { response, produtos };
     }
