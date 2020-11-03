@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "lib": [
       "ES2015",
       "DOM"
@@ -12,8 +14,16 @@
     "esModuleInterop": true,
     "noEmitOnError": true,
     "watch": true,
-    "strictPropertyInitialization":false
-  },
+    "strictPropertyInitialization":false,
+
+
+    "module": "commonjs",    
+    
+    "strictNullChecks": false,
+    // "noUnusedLocals": true,
+    "pretty": true,
+    "skipLibCheck": true    
+  },  
   "exclude": [
     "node_modules"
   ]
